@@ -1,3 +1,7 @@
+using Microsoft.Extensions.Configuration;
+using MyCookBook.Domain.Extension;
+using MyCookBook.Infrastructure.Migrations;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,4 +26,14 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+UpdateDataBase();
+
 app.Run();
+
+void UpdateDataBase() 
+{
+    var connection = builder.Configuration.GetConnectionString();
+    var databaseName = builder.Configuration.GetDatabaseName();
+
+    Database.CreateDatabase(connection, databaseName);
+}
