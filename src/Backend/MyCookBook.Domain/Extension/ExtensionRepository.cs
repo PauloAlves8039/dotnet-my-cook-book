@@ -10,10 +10,18 @@ namespace MyCookBook.Domain.Extension
             return databaseName;
         }
 
-        public static string GetConnectionString(this IConfiguration configurationManager)
+        public static string GetConnection(this IConfiguration configurationManager)
         {
             var connection = configurationManager.GetConnectionString("Connection");
             return connection;
+        }
+
+        public static string GetFullConnection(this IConfiguration configurationManager) 
+        {
+            var databaseName = configurationManager.GetDatabaseName();
+            var connection = configurationManager.GetConnection();
+
+            return $"{connection}Database={databaseName}";    
         }
     }
 

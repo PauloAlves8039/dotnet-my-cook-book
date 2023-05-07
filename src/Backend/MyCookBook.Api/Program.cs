@@ -1,5 +1,5 @@
-using Microsoft.Extensions.Configuration;
 using MyCookBook.Domain.Extension;
+using MyCookBook.Infrastructure;
 using MyCookBook.Infrastructure.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddRepository(builder.Configuration);
 
 var app = builder.Build();
 
@@ -32,8 +34,10 @@ app.Run();
 
 void UpdateDataBase() 
 {
-    var connection = builder.Configuration.GetConnectionString();
+    var connection = builder.Configuration.GetConnection();
     var databaseName = builder.Configuration.GetDatabaseName();
 
     Database.CreateDatabase(connection, databaseName);
+
+    app.MigrateDatabase();
 }
