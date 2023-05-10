@@ -22,14 +22,14 @@ namespace MyCookBook.Exceptions {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ResourceMessagesErro {
+    public class ResourceErroMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourceMessagesErro() {
+        internal ResourceErroMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MyCookBook.Exceptions {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyCookBook.Exceptions.ResourceMessagesErro", typeof(ResourceMessagesErro).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyCookBook.Exceptions.ResourceErroMessages", typeof(ResourceErroMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
