@@ -1,12 +1,13 @@
 ﻿using MyCookBook.Communication.Requests;
+using MyCookBook.Exceptions.ExceptionsBase;
 
 namespace MyCookBook.Application.UseCases.User.Register
 {
     public class RegisterUserUseCase
     {
-        public Task Execute(RequestRegisterUserJson request) 
+        public async Task Execute(RequestRegisterUserJson request) 
         {
-            
+            Validate(request);
         }
 
         private void Validate(RequestRegisterUserJson request) 
@@ -14,10 +15,10 @@ namespace MyCookBook.Application.UseCases.User.Register
             var validator = new RegisterUserValidator();
             var result = validator.Validate(request);
 
-            if (result.IsValid) 
+            if (!result.IsValid) 
             {
-                var errorMessages = result.Errors.Select(error => error.ErrorMessage);
-                throw new Exception();
+                var errorMessages = result.Errors.Select(error => error.ErrorMessage).ToList();
+                throw new ValidationErrorsException(errorMessages);
             }
         }
     }

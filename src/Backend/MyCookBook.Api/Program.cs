@@ -1,3 +1,4 @@
+using MyCookBook.Api.Filters;
 using MyCookBook.Domain.Extension;
 using MyCookBook.Infrastructure;
 using MyCookBook.Infrastructure.Migrations;
@@ -12,6 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddRepository(builder.Configuration);
+
+builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 var app = builder.Build();
 
