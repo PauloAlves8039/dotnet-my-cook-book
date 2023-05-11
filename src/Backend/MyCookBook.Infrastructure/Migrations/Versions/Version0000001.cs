@@ -9,7 +9,7 @@ namespace MyCookBook.Infrastructure.Migrations.Versions
 
         public override void Up()
         {
-            var table = BaseVersion.InsertDefaultColumns(Create.Table("User"));
+            var table = BaseVersion.InsertDefaultColumns(Create.Table("Users"));
 
             table
                 .WithColumn("Name").AsString(100).NotNullable()

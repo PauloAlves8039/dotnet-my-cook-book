@@ -1,4 +1,6 @@
 using MyCookBook.Api.Filters;
+using MyCookBook.Application.Services.Automapper;
+using MyCookBook.Application;
 using MyCookBook.Domain.Extension;
 using MyCookBook.Infrastructure;
 using MyCookBook.Infrastructure.Migrations;
@@ -13,8 +15,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddRepository(builder.Configuration);
+builder.Services.AddApplication();
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
+
+builder.Services.AddScoped(provider => new AutoMapper.MapperConfiguration(cfg => 
+{
+    cfg.AddProfile(new AutoMapperConfig());
+}).CreateMapper());
 
 var app = builder.Build();
 
