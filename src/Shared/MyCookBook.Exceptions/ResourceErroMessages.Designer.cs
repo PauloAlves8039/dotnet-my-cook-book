@@ -124,6 +124,15 @@ namespace MyCookBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The email informed is already registered in the database.
+        /// </summary>
+        public static string REGISTERED_EMAIL {
+            get {
+                return ResourceManager.GetString("REGISTERED_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown error.
         /// </summary>
         public static string UNKNOWN_ERROR {

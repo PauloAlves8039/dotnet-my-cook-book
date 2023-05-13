@@ -138,6 +138,9 @@
   <data name="INVALID_PHONE" xml:space="preserve">
     <value>O número de telefone do usuário deve estar no formato XX X-XXXX-XXXX</value>
   </data>
+  <data name="REGISTERED_EMAIL" xml:space="preserve">
+    <value>O e-mail informado já está cadastrado no banco de dados</value>
+  </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Erro desconhecido</value>
   </data>

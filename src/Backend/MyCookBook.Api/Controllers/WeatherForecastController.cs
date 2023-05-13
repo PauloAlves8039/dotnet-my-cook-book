@@ -8,18 +8,28 @@ namespace MyCookBook.Api.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<IActionResult> Get([FromServices] IRegisterUserUseCase useCase)
+        private static readonly string[] Summaries = new[]
         {
-            var resposta = await useCase.Execute(new RequestRegisterUserJson
-            {
-                Email = "paulo@gmail.com",
-                Name = "Paulo",
-                Password = "123456",
-                Phone = "81 9 9999-8888"
-            });
+        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    };
 
-            return Ok(resposta);
+        private readonly ILogger<WeatherForecastController> _logger;
+
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        {
+            _logger = logger;
+        }
+
+        [HttpGet(Name = "GetWeatherForecast")]
+        public IEnumerable<WeatherForecast> Get()
+        {
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = Random.Shared.Next(-20, 55),
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+            })
+            .ToArray();
         }
     }
 }
