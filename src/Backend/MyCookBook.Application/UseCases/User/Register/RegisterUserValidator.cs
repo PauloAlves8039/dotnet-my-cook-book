@@ -11,8 +11,8 @@ namespace MyCookBook.Application.UseCases.User.Register
         {
             RuleFor(c => c.Name).NotEmpty().WithMessage(ResourceErroMessages.EMPTY_NAME);
             RuleFor(c => c.Email).NotEmpty().WithMessage(ResourceErroMessages.EMPTY_EMAIL);
-            RuleFor(c => c.Password).NotEmpty().WithMessage(ResourceErroMessages.EMPTY_PHONE);
-            RuleFor(c => c.Phone).NotEmpty().WithMessage(ResourceErroMessages.EMPTY_PASSWORD);
+            RuleFor(c => c.Password).NotEmpty().WithMessage(ResourceErroMessages.EMPTY_PASSWORD);
+            RuleFor(c => c.Phone).NotEmpty().WithMessage(ResourceErroMessages.EMPTY_PHONE);
             When(c => !string.IsNullOrWhiteSpace(c.Email), () =>
             {
                 RuleFor(c => c.Email).EmailAddress().WithMessage(ResourceErroMessages.INVALID_EMAIL);
