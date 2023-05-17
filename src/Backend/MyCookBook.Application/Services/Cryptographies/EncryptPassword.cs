@@ -5,16 +5,16 @@ namespace MyCookBook.Application.Services.Cryptographies
 {
     public class EncryptPassword
     {
-        private readonly string _encryptionKey;
+        private readonly string _additionalKey;
 
         public EncryptPassword(string encryptionKey)
         {
-            _encryptionKey = encryptionKey;
+            _additionalKey = encryptionKey;
         }
 
         public string Encrypt(string password) 
         {
-            var passwordWithAdditionalKey = $"{password}{_encryptionKey}";
+            var passwordWithAdditionalKey = $"{password}{_additionalKey}";
 
             var bytes = Encoding.UTF8.GetBytes(passwordWithAdditionalKey);
             var sha512 = SHA512.Create();
