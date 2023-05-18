@@ -3,7 +3,6 @@ using MyCookBook.Application.Services.Cryptographies;
 using MyCookBook.Application.Services.Token;
 using MyCookBook.Communication.Requests;
 using MyCookBook.Communication.Responses;
-using MyCookBook.Domain.Entities;
 using MyCookBook.Domain.Repositories;
 using MyCookBook.Exceptions;
 using MyCookBook.Exceptions.ExceptionsBase;

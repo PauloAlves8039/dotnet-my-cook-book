@@ -4,6 +4,7 @@ using MyCookBook.Application;
 using MyCookBook.Domain.Extension;
 using MyCookBook.Infrastructure;
 using MyCookBook.Infrastructure.Migrations;
+using MyCookBook.Infrastructure.RepositoryAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,10 +48,21 @@ app.Run();
 
 void UpdateDataBase() 
 {
-    var connection = builder.Configuration.GetConnection();
-    var databaseName = builder.Configuration.GetDatabaseName();
+    using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
 
-    Database.CreateDatabase(connection, databaseName);
+    using var context = serviceScope.ServiceProvider.GetService<MyCookBookContext>();
 
-    app.MigrateDatabase();
+    bool? dataBaseInMemory = context?.Database?.ProviderName?.Equals("Microsoft.EntityFrameworkCore.InMemory");
+
+    if (!dataBaseInMemory.HasValue || !dataBaseInMemory.Value) 
+    {
+        var connection = builder.Configuration.GetConnection();
+        var databaseName = builder.Configuration.GetDatabaseName();
+
+        Database.CreateDatabase(connection, databaseName);
+
+        app.MigrateDatabase();
+    }
 }
+
+public partial class Program { }

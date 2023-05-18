@@ -23,13 +23,18 @@ namespace MyCookBook.Infrastructure
 
         private static void AddContext(IServiceCollection services, IConfiguration configurationManager) 
         {
-            var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
-            var connextionString = configurationManager.GetFullConnection();
+            bool.TryParse(configurationManager.GetSection("Configurations:DataBaseInMemory").Value, out bool dataBaseInMemory);
 
-            services.AddDbContext<MyCookBookContext>(dbContextOptions => 
+            if (!dataBaseInMemory) 
             {
-                dbContextOptions.UseMySql(connextionString, serverVersion);
-            });
+                var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
+                var connextionString = configurationManager.GetFullConnection();
+
+                services.AddDbContext<MyCookBookContext>(dbContextOptions =>
+                {
+                    dbContextOptions.UseMySql(connextionString, serverVersion);
+                });
+            }
         }
 
         private static void AddUnitOfWork(IServiceCollection services) 
@@ -45,9 +50,14 @@ namespace MyCookBook.Infrastructure
 
         private static void AddFluentMigrator(IServiceCollection services, IConfiguration configurationManager) 
         {
-            services.AddFluentMigratorCore().ConfigureRunner(c => 
+            bool.TryParse(configurationManager.GetSection("Configurations:DataBaseInMemory").Value, out bool dataBaseInMemory);
+
+            if (!dataBaseInMemory) 
+            {
+                services.AddFluentMigratorCore().ConfigureRunner(c =>
                 c.AddMySql5()
                 .WithGlobalConnectionString(configurationManager.GetFullConnection()).ScanIn(Assembly.Load("MyCookBook.Infrastructure")).For.All());
+            }
         }
     }
 }
