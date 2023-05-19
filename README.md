@@ -10,6 +10,10 @@ Repositório com uma API para gerenciar um projeto de livro de receitas.
 - [Entity Framework Core v7.0.5](https://docs.microsoft.com/pt-br/ef/core/)
 - [MySQL v8.0. 33](https://www.mysql.com/)
 - [Swagger v6.5.0](https://swagger.io/)
+- [AutoMapper v11.0.1](https://automapper.org/)
+- [XUnit v2.4.2](https://xunit.net/)
+- [FluentAssertions v6.11.0](https://fluentassertions.com/)
+- [Moq v6.11.0](https://moq.github.io/moq4/)
 
 ## :floppy_disk: Clonar Repositório
 
