@@ -22,5 +22,11 @@ namespace MyCookBook.Infrastructure.RepositoryAccess.Repository
         {
             return await _context.Users.AnyAsync(c => c.Email.Equals(email));
         }
+
+        public async Task<User> Login(string email, string password)
+        {
+            return await _context.Users.AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Email.Equals(email) && c.Password.Equals(password));
+        }
     }
 }
