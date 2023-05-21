@@ -132,6 +132,9 @@
   <data name="INVALID_EMAIL" xml:space="preserve">
     <value>O e-mail do usuário é inválido</value>
   </data>
+  <data name="INVALID_LOGIN" xml:space="preserve">
+    <value>O e-mail e/ou senha estão incorretos</value>
+  </data>
   <data name="INVALID_PASSWORD" xml:space="preserve">
     <value>A senha deve ter pelo menos 6 caracteres</value>
   </data>

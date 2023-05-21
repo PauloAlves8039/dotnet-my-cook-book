@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using MyCookBook.Application.Services.Cryptographies;
 using MyCookBook.Application.Services.Token;
+using MyCookBook.Application.UseCases.Login.DoLogin;
 using MyCookBook.Application.UseCases.User.Register;
 
 namespace MyCookBook.Application
@@ -10,12 +11,9 @@ namespace MyCookBook.Application
     {
         public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
-
             AddPasswordKeySetting(services, configuration);
-
             AddJwtToken(services, configuration);
-
-            services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+            AddUseCase(services);
         }
 
         private static void AddPasswordKeySetting(IServiceCollection services, IConfiguration configuration) 
@@ -31,6 +29,12 @@ namespace MyCookBook.Application
             var keySection = configuration.GetRequiredSection("Configurations:KeyToken");
 
             services.AddScoped(option => new TokenController(int.Parse(lifetimeSection.Value), keySection.Value));
+        }
+
+        private static void AddUseCase(IServiceCollection services) 
+        {
+            services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>()
+                .AddScoped<ILoginUseCase, LoginUseCase>();
         }
     }
 }

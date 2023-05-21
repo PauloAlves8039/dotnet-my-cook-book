@@ -19,9 +19,13 @@ namespace MyCookBook.Api.Filters
 
         private void TreatMyCookBookException(ExceptionContext context) 
         {
-            if (context.Exception is ValidationErrorsException) 
+            if (context.Exception is ValidationErrorsException)
             {
                 TreatValidationErrorException(context);
+            }
+            else if (context.Exception is LoginInvalidException) 
+            {
+                
             }
         }
 
@@ -31,6 +35,14 @@ namespace MyCookBook.Api.Filters
 
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             context.Result = new ObjectResult(new ErrorResponseJson(errorValidationException.errorMessage));
+        }
+
+        private void TreatLoginException(ExceptionContext context)
+        {
+            var errorLogin = context.Exception as LoginInvalidException;
+
+            context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            context.Result = new ObjectResult(new ErrorResponseJson(errorLogin.Message));
         }
 
         private void ThrowUnknownError(ExceptionContext context) 
