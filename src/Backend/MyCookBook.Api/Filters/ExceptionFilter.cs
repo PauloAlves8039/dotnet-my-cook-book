@@ -25,7 +25,7 @@ namespace MyCookBook.Api.Filters
             }
             else if (context.Exception is LoginInvalidException) 
             {
-                
+                TreatLoginException(context);
             }
         }
 

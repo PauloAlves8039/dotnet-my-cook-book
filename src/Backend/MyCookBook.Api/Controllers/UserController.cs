@@ -5,9 +5,7 @@ using MyCookBook.Communication.Responses;
 
 namespace MyCookBook.Api.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class UserController : MyCookBookController
     {
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRegisterUserJson), StatusCodes.Status201Created)]
