@@ -1,4 +1,5 @@
 ﻿using Moq;
+using MyCookBook.Domain.Entities;
 using MyCookBook.Domain.Repositories;
 
 namespace Utils.ForTest.Repositories
@@ -29,6 +30,13 @@ namespace Utils.ForTest.Repositories
                 _repository.Setup(i => i.ExistsUserWithEmail(email)).ReturnsAsync(true);
             }
             return this;
+        }
+
+        public UserReadOnlyRepositoryBuilder RecoverPasswordByEmail(User user) 
+        {
+            _repository.Setup(i => i.RecoverPasswordByEmail(user.Email, user.Password)).ReturnsAsync(user);
+
+            return this;   
         }
 
         public IUserReadOnlyRepository Build()
