@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyCookBook.Domain.Entities;
-using MyCookBook.Domain.Repositories;
+using MyCookBook.Domain.Repositories.User;
 
 namespace MyCookBook.Infrastructure.RepositoryAccess.Repository
 {
-    public class UserRepository : IUserWriteOnlyRepository, IUserReadOnlyRepository
+    public class UserRepository : IUserWriteOnlyRepository, IUserReadOnlyRepository, IUpdateOnlyRepository
     {
         private readonly MyCookBookContext _context;
 
@@ -27,6 +27,11 @@ namespace MyCookBook.Infrastructure.RepositoryAccess.Repository
         {
             return await _context.Users.AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Email.Equals(email) && c.Password.Equals(password));
+        }
+
+        public void Update(User user)
+        {
+            _context.Users.Update(user);
         }
     }
 }

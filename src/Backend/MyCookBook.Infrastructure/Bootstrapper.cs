@@ -7,6 +7,7 @@ using MyCookBook.Domain.Repositories;
 using MyCookBook.Infrastructure.RepositoryAccess.Repository;
 using MyCookBook.Infrastructure.RepositoryAccess;
 using Microsoft.EntityFrameworkCore;
+using MyCookBook.Domain.Repositories.User;
 
 namespace MyCookBook.Infrastructure
 {
@@ -45,7 +46,8 @@ namespace MyCookBook.Infrastructure
         private static void AddRepositories(IServiceCollection services) 
         {
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>()
-                .AddScoped<IUserReadOnlyRepository, UserRepository>();
+                .AddScoped<IUserReadOnlyRepository, UserRepository>()
+                .AddScoped<IUpdateOnlyRepository, UserRepository>();
         }
 
         private static void AddFluentMigrator(IServiceCollection services, IConfiguration configurationManager) 
