@@ -1,6 +1,6 @@
 ﻿using Moq;
 using MyCookBook.Domain.Entities;
-using MyCookBook.Domain.Repositories;
+using MyCookBook.Domain.Repositories.User;
 
 namespace Utils.ForTest.Repositories
 {

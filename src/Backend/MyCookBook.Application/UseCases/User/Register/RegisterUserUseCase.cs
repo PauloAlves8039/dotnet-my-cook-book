@@ -4,6 +4,7 @@ using MyCookBook.Application.Services.Token;
 using MyCookBook.Communication.Requests;
 using MyCookBook.Communication.Responses;
 using MyCookBook.Domain.Repositories;
+using MyCookBook.Domain.Repositories.User;
 using MyCookBook.Exceptions;
 using MyCookBook.Exceptions.ExceptionsBase;
 

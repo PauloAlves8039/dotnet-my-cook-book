@@ -1,4 +1,4 @@
-﻿namespace MyCookBook.Domain.Repositories
+﻿namespace MyCookBook.Domain.Repositories.User
 {
     public interface IUserWriteOnlyRepository
     {
