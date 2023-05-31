@@ -37,7 +37,7 @@ namespace MyCookBook.Application.Services.Token
             return tokenHandler.WriteToken(securityToken);
         }
 
-        public void ValidateToken(string token) 
+        public ClaimsPrincipal ValidateToken(string token) 
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -50,7 +50,16 @@ namespace MyCookBook.Application.Services.Token
                 ValidateAudience = false,
             };
 
-            tokenHandler.ValidateToken(token, validationParameters, out _);
+            var claims = tokenHandler.ValidateToken(token, validationParameters, out _);
+
+            return claims;
+        }
+
+        public string RetrieveEmail(string token) 
+        {
+            var claims =  ValidateToken(token);
+
+            return claims.FindFirst(EmailAlias).Value;
         }
 
         private SymmetricSecurityKey SimetricKey()

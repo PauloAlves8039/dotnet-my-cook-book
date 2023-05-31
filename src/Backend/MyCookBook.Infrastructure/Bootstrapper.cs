@@ -47,7 +47,7 @@ namespace MyCookBook.Infrastructure
         {
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>()
                 .AddScoped<IUserReadOnlyRepository, UserRepository>()
-                .AddScoped<IUpdateOnlyRepository, UserRepository>();
+                .AddScoped<IUserUpdateOnlyRepository, UserRepository>();
         }
 
         private static void AddFluentMigrator(IServiceCollection services, IConfiguration configurationManager) 

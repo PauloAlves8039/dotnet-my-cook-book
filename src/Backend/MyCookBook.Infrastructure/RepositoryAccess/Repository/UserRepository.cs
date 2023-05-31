@@ -4,7 +4,7 @@ using MyCookBook.Domain.Repositories.User;
 
 namespace MyCookBook.Infrastructure.RepositoryAccess.Repository
 {
-    public class UserRepository : IUserWriteOnlyRepository, IUserReadOnlyRepository, IUpdateOnlyRepository
+    public class UserRepository : IUserWriteOnlyRepository, IUserReadOnlyRepository, IUserUpdateOnlyRepository
     {
         private readonly MyCookBookContext _context;
 

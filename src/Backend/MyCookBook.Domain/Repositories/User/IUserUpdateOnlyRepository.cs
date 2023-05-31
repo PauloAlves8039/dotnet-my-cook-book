@@ -1,6 +1,6 @@
 ﻿namespace MyCookBook.Domain.Repositories.User
 {
-    public interface IUpdateOnlyRepository
+    public interface IUserUpdateOnlyRepository
     {
         void Update(Entities.User user);
     }
