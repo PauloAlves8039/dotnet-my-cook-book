@@ -55,7 +55,7 @@ namespace MyCookBook.Application.Services.Token
             return claims;
         }
 
-        public string RetrieveEmail(string token) 
+        public string RecoverEmail(string token) 
         {
             var claims =  ValidateToken(token);
 

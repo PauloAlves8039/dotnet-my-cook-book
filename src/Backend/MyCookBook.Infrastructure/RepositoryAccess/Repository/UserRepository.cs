@@ -23,10 +23,19 @@ namespace MyCookBook.Infrastructure.RepositoryAccess.Repository
             return await _context.Users.AnyAsync(c => c.Email.Equals(email));
         }
 
+        public async Task<User> RecoverByEmail(string email)
+        {
+            return await _context.Users.AsNoTracking().FirstOrDefaultAsync();
+        }
+
+        public async Task<User> RecoverById(long id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
         public async Task<User> RecoverPasswordByEmail(string email, string password)
         {
-            return await _context.Users.AsNoTracking()
-                .FirstOrDefaultAsync(c => c.Email.Equals(email) && c.Password.Equals(password));
+            return await _context.Users.AsNoTracking().FirstOrDefaultAsync(c => c.Email.Equals(email) && c.Password.Equals(password));
         }
 
         public void Update(User user)
