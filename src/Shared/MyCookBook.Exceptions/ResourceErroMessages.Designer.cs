@@ -97,6 +97,15 @@ namespace MyCookBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log in again to the application.
+        /// </summary>
+        public static string EXPIRED_TOKEN {
+            get {
+                return ResourceManager.GetString("EXPIRED_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The current password is invalid.
         /// </summary>
         public static string INVALID_CURRENT_PASSWORD {
@@ -156,6 +165,15 @@ namespace MyCookBook.Exceptions {
         public static string UNKNOWN_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are not allowed to access this resource.
+        /// </summary>
+        public static string USER_WITHOUT_PERMISSION {
+            get {
+                return ResourceManager.GetString("USER_WITHOUT_PERMISSION", resourceCulture);
             }
         }
     }

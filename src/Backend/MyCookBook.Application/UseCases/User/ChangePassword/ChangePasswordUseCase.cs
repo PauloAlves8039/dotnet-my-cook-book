@@ -1,6 +1,7 @@
 ﻿using MyCookBook.Application.Services.Cryptographies;
 using MyCookBook.Application.Services.LoggedUsers;
 using MyCookBook.Communication.Requests;
+using MyCookBook.Domain.Repositories;
 using MyCookBook.Domain.Repositories.User;
 using MyCookBook.Exceptions;
 using MyCookBook.Exceptions.ExceptionsBase;
@@ -12,12 +13,14 @@ namespace MyCookBook.Application.UseCases.User.ChangePassword
         private readonly ILoggedUser _loggedUser;
         private readonly IUserUpdateOnlyRepository _repository;
         private readonly EncryptPassword _encryptPassword;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ChangePasswordUseCase(IUserUpdateOnlyRepository repository, ILoggedUser loggedUser, EncryptPassword encryptPassword)
+        public ChangePasswordUseCase(IUserUpdateOnlyRepository repository, ILoggedUser loggedUser, EncryptPassword encryptPassword, IUnitOfWork unitOfWork)
         {
             _repository = repository;
             _loggedUser = loggedUser;
             _encryptPassword = encryptPassword;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task Execute(RequestChangePasswordJson request)
@@ -31,6 +34,8 @@ namespace MyCookBook.Application.UseCases.User.ChangePassword
             user.Password = _encryptPassword.Encrypt(request.NewPassword);
 
             _repository.Update(user);
+
+            await _unitOfWork.Commit();
         }
 
         private void Validate(RequestChangePasswordJson request, Domain.Entities.User user) 

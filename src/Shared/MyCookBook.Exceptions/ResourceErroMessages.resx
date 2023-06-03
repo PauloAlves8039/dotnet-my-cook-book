@@ -129,6 +129,9 @@
   <data name="EMPTY_PHONE" xml:space="preserve">
     <value>The user's phone must be informed</value>
   </data>
+  <data name="EXPIRED_TOKEN" xml:space="preserve">
+    <value>Log in again to the application</value>
+  </data>
   <data name="INVALID_CURRENT_PASSWORD" xml:space="preserve">
     <value>The current password is invalid</value>
   </data>
@@ -149,5 +152,8 @@
   </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Unknown error</value>
+  </data>
+  <data name="USER_WITHOUT_PERMISSION" xml:space="preserve">
+    <value>You are not allowed to access this resource</value>
   </data>
 </root>
