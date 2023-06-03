@@ -129,6 +129,9 @@
   <data name="EMPTY_PHONE" xml:space="preserve">
     <value>O telefone do usuário deve ser informado</value>
   </data>
+  <data name="INVALID_CURRENT_PASSWORD" xml:space="preserve">
+    <value>A senha atual é inválida</value>
+  </data>
   <data name="INVALID_EMAIL" xml:space="preserve">
     <value>O e-mail do usuário é inválido</value>
   </data>

@@ -97,6 +97,15 @@ namespace MyCookBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The current password is invalid.
+        /// </summary>
+        public static string INVALID_CURRENT_PASSWORD {
+            get {
+                return ResourceManager.GetString("INVALID_CURRENT_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The user&apos;s email is invalid.
         /// </summary>
         public static string INVALID_EMAIL {
