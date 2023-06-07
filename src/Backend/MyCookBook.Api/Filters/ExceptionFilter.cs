@@ -34,7 +34,7 @@ namespace MyCookBook.Api.Filters
             var errorValidationException = context.Exception as ValidationErrorsException;
 
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            context.Result = new ObjectResult(new ErrorResponseJson(errorValidationException.errorMessage));
+            context.Result = new ObjectResult(new ErrorResponseJson(errorValidationException.ErrorMessage));
         }
 
         private void TreatLoginException(ExceptionContext context)

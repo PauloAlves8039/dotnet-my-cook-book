@@ -2,11 +2,11 @@
 {
     public class ValidationErrorsException : MyCookBookException
     {
-        public List<string> errorMessage { get; set; }
+        public List<string> ErrorMessage { get; set; }
 
         public ValidationErrorsException(List<string> errorMessage) : base(string.Empty)
         {
-            this.errorMessage = errorMessage;
+            ErrorMessage = errorMessage;
         }
     }
 }
