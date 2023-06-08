@@ -21,15 +21,15 @@ namespace MyCookBook.Application
 
         private static void AddPasswordKeySetting(IServiceCollection services, IConfiguration configuration) 
         {
-            var section = configuration.GetRequiredSection("Configurations:AdditionalKeyPassword");
+            var section = configuration.GetRequiredSection("Configurations:password:AdditionalKeyPassword");
 
             services.AddScoped(option => new EncryptPassword(section.Value));
         }
 
         private static void AddJwtToken(IServiceCollection services, IConfiguration configuration)
         {
-            var lifetimeSection = configuration.GetRequiredSection("Configurations:LifetimeToken");
-            var keySection = configuration.GetRequiredSection("Configurations:KeyToken");
+            var lifetimeSection = configuration.GetRequiredSection("Configurations:Jwt:TokenLifetimeMinutes");
+            var keySection = configuration.GetRequiredSection("Configurations:Jwt:KeyToken");
 
             services.AddScoped(option => new TokenController(int.Parse(lifetimeSection.Value), keySection.Value));
         }

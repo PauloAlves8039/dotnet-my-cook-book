@@ -5,6 +5,7 @@ using MyCookBook.Domain.Extension;
 using MyCookBook.Infrastructure;
 using MyCookBook.Infrastructure.Migrations;
 using MyCookBook.Infrastructure.RepositoryAccess;
+using MyCookBook.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddRepository(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
@@ -47,6 +48,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 UpdateDataBase();
+
+app.UseMiddleware<CultureMiddleware>();
 
 app.Run();
 
