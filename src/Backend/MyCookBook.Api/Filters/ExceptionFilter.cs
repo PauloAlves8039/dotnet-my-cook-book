@@ -15,9 +15,13 @@ namespace MyCookBook.Api.Filters
             {
                 TreatMyCookBookException(context);
             }
+            else 
+            {
+                ThrowUnknownError(context);
+            }
         }
 
-        private void TreatMyCookBookException(ExceptionContext context) 
+        private static void TreatMyCookBookException(ExceptionContext context) 
         {
             if (context.Exception is ValidationErrorsException)
             {
@@ -29,7 +33,7 @@ namespace MyCookBook.Api.Filters
             }
         }
 
-        private void TreatValidationErrorException(ExceptionContext context) 
+        private static void TreatValidationErrorException(ExceptionContext context) 
         {
             var errorValidationException = context.Exception as ValidationErrorsException;
 
@@ -37,7 +41,7 @@ namespace MyCookBook.Api.Filters
             context.Result = new ObjectResult(new ErrorResponseJson(errorValidationException.ErrorMessage));
         }
 
-        private void TreatLoginException(ExceptionContext context)
+        private static void TreatLoginException(ExceptionContext context)
         {
             var errorLogin = context.Exception as LoginInvalidException;
 
@@ -45,7 +49,7 @@ namespace MyCookBook.Api.Filters
             context.Result = new ObjectResult(new ErrorResponseJson(errorLogin.Message));
         }
 
-        private void ThrowUnknownError(ExceptionContext context) 
+        private static void ThrowUnknownError(ExceptionContext context) 
         {
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             context.Result = new ObjectResult(new ErrorResponseJson(ResourceErroMessages.UNKNOWN_ERROR));

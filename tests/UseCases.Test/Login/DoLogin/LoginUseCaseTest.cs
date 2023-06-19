@@ -90,7 +90,7 @@ namespace UseCases.Test.Login.DoLogin
                 .Where(exception => exception.Message.Equals(ResourceErroMessages.INVALID_LOGIN));
         } 
 
-        private LoginUseCase CreateUseCase(MyCookBook.Domain.Entities.User user) 
+        private static LoginUseCase CreateUseCase(MyCookBook.Domain.Entities.User user) 
         {
             var cryptography = EncryptPasswordBuilder.Instance();
             var token = TokenControllerBuilder.Instance();

@@ -24,7 +24,7 @@ namespace MyCookBook.Infrastructure
 
         private static void AddContext(IServiceCollection services, IConfiguration configurationManager) 
         {
-            bool.TryParse(configurationManager.GetSection("Configurations:DataBaseInMemory").Value, out bool dataBaseInMemory);
+            _ = bool.TryParse(configurationManager.GetSection("Configurations:DataBaseInMemory").Value, out bool dataBaseInMemory);
 
             if (!dataBaseInMemory) 
             {
@@ -52,7 +52,7 @@ namespace MyCookBook.Infrastructure
 
         private static void AddFluentMigrator(IServiceCollection services, IConfiguration configurationManager) 
         {
-            bool.TryParse(configurationManager.GetSection("Configurations:DataBaseInMemory").Value, out bool dataBaseInMemory);
+            _ = bool.TryParse(configurationManager.GetSection("Configurations:DataBaseInMemory").Value, out bool dataBaseInMemory);
 
             if (!dataBaseInMemory) 
             {

@@ -52,7 +52,7 @@ namespace UseCases.Test.User.Register
                 .Where(exception => exception.ErrorMessage.Count == 1 && exception.ErrorMessage.Contains(ResourceErroMessages.EMPTY_EMAIL));
         }
 
-        private RegisterUserUseCase CreateUSeCase(string email = "") 
+        private static RegisterUserUseCase CreateUSeCase(string email = "") 
         {
             var mapper = MapperBuilder.Instance();
             var repository = UserWriteOnlyRepositoryBuilder.Instance().Build();

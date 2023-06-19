@@ -52,13 +52,32 @@ namespace UseCases.Test.User.ChangePassword
                 .Where(ex => ex.ErrorMessage.Count == 1 && ex.ErrorMessage.Contains(ResourceErroMessages.EMPTY_PASSWORD));
         }
 
+        [Fact]
+        public async Task Validate_Error_CurrentPassword_Invalid()
+        {
+            (var user, var password) = UserBuilder.Build();
+
+            var useCase = CreateUseCase(user);
+
+            var request = RequestChangePasswordUserBuilder.Build();
+            request.CurrentPassword = "invalidPassword";
+
+            Func<Task> action = async () =>
+            {
+                await useCase.Execute(request);
+            };
+
+            await action.Should().ThrowAsync<ValidationErrorsException>()
+                .Where(ex => ex.ErrorMessage.Count == 1 && ex.ErrorMessage.Contains(ResourceErroMessages.INVALID_CURRENT_PASSWORD));
+        }
+
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(3)]
         [InlineData(4)]
         [InlineData(5)]
-        public async Task Validate_Error_CurrentPassword_Invalid(int passwordSize)
+        public async Task Validate_Error_Minimum_Characters(int passwordSize)
         {
             (var user, var password) = UserBuilder.Build();
 
@@ -76,7 +95,7 @@ namespace UseCases.Test.User.ChangePassword
                 .Where(ex => ex.ErrorMessage.Count == 1 && ex.ErrorMessage.Contains(ResourceErroMessages.INVALID_PASSWORD));
         }
 
-        private ChangePasswordUseCase CreateUseCase(MyCookBook.Domain.Entities.User user) 
+        private static ChangePasswordUseCase CreateUseCase(MyCookBook.Domain.Entities.User user) 
         {
             var crypter = EncryptPasswordBuilder.Instance();
             var unitOfWork = UnitOfWorkBuilder.Instance().Build();

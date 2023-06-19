@@ -1,5 +1,8 @@
-﻿namespace MyCookBook.Exceptions.ExceptionsBase
+﻿using System.Runtime.Serialization;
+
+namespace MyCookBook.Exceptions.ExceptionsBase
 {
+    [Serializable]
     public class ValidationErrorsException : MyCookBookException
     {
         public List<string> ErrorMessage { get; set; }
@@ -8,5 +11,7 @@
         {
             ErrorMessage = errorMessage;
         }
+
+        protected ValidationErrorsException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 }

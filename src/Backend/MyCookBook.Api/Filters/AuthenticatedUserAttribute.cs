@@ -6,6 +6,7 @@ using MyCookBook.Application.Services.Token;
 using MyCookBook.Communication.Responses;
 using MyCookBook.Domain.Repositories.User;
 using MyCookBook.Exceptions;
+using MyCookBook.Exceptions.ExceptionsBase;
 
 namespace MyCookBook.Api.Filters
 {
@@ -31,7 +32,7 @@ namespace MyCookBook.Api.Filters
 
                 if (user is null)
                 {
-                    throw new Exception();
+                    throw new MyCookBookException(string.Empty);
                 }
             }
             catch (SecurityTokenExpiredException)
@@ -44,24 +45,24 @@ namespace MyCookBook.Api.Filters
             }
         }
 
-        private string TokenInRequest(AuthorizationFilterContext context) 
+        private static string TokenInRequest(AuthorizationFilterContext context) 
         {
             var authorization = context.HttpContext.Request.Headers["Authorization"].ToString();
 
             if (string.IsNullOrWhiteSpace(authorization)) 
             {
-                throw new Exception();
+                throw new MyCookBookException(string.Empty);
             }
 
             return authorization["Bearer".Length..].Trim();
         }
 
-        private void ExpiredToken(AuthorizationFilterContext context) 
+        private static void ExpiredToken(AuthorizationFilterContext context) 
         {
             context.Result = new UnauthorizedObjectResult(new ErrorResponseJson(ResourceErroMessages.EXPIRED_TOKEN));
         }
         
-        private void UserWithoutPermission(AuthorizationFilterContext context)
+        private static void UserWithoutPermission(AuthorizationFilterContext context)
         {
             context.Result = new UnauthorizedObjectResult(new ErrorResponseJson(ResourceErroMessages.USER_WITHOUT_PERMISSION));
         }
